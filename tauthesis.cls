@@ -31,23 +31,28 @@
 %%%%% CLASS OPTIONS %%%%%
 
 % Language selection.
-\newif\if@langenglish\@langenglishfalse
+\newif\iflangenglish
+\langenglishfalse
+
 \DeclareOption{english}{%
-    \@langenglishtrue
+    \langenglishtrue
     \renewcommand{\@mainlanguage}{english}
     \renewcommand{\@otherlanguage}{finnish}
 }
 \DeclareOption{finnish}{%
-    \@langenglishfalse
+    \langenglishfalse
     \newcommand{\@mainlanguage}{finnish}
     \newcommand{\@otherlanguage}{english}
 }
 
 % Citation style selection.
+\newif\ifnumeric\numericfalse
 \DeclareOption{numeric}{%
+    \numerictrue
     \newcommand{\@citationstyle}{numeric}
 }
 \DeclareOption{authoryear}{%
+    \numericfalse
     \renewcommand{\@citationstyle}{authoryear}
 }
 
@@ -167,34 +172,177 @@
 \RequirePackage[en-GB,finnish]{datetime2}
 \DTMlangsetup[en-GB,finnish]{showdayofmonth=false}
 
-% Smart bibliography handling
-\RequirePackage
-    [backend=biber,
-    sorting=nyt,
-    citestyle=\@citationstyle,
-    bibstyle=\@citationstyle,
-    maxbibnames=99,
-    giveninits=true,
-    uniquename=init,
-    sortcites,
-    sortlocale=fin]{biblatex}
+% -----------------------------------------------------------------------------
 
-\DefineBibliographyStrings{finnish}{%
-  bibliography = {Lähdeluettelo},
-  references = {Lähdeluettelo},
-}
-\DefineBibliographyStrings{english}{%
-  bibliography = {References},
-  references = {References},
+% Bibliography macros
+
+% TODO: adddot: lyhenteen perään, addperiod: muuten
+% TODO: dashed=false author-yeariin
+% TODO: sorting=none jos citationstyle on numeric
+
+\RequirePackage[style=\@citationstyle,maxcitenames=2,backend=biber,
+giveninits=true,isbn=false,doi=false,sorting=none,dashed=false]{biblatex}
+
+\ifnumeric
+    \RequirePackage[backend=biber,
+                    doi=false,
+                    giveninits=true,
+                    isbn=false,
+                    maxcitenames=2,
+                    style=\@citationstyle,
+                    sorting=none]{biblatex}
+    \newcommand{\addseparator}{\addcomma\space}
+\else
+    \RequirePackage[backend=biber,
+                    doi=false,
+                    giveninits=true,
+                    isbn=false,
+                    maxcitenames=2,
+                    style=\@citationstyle,
+                    dashed=false]{biblatex}
+    \newcommand{\addseparator}{\addperiod\space}
+\fi
+
+\ifnumeric
+\else
+    \DeclareNameAlias{sortname}{family-given}
+    \DeclareNameAlias{default}{family-given}
+\fi
+
+% Remove formatting (italics etc.) from titles and years
+\DeclareFieldFormat[article,book,inbook,inproceedings,online,thesis]{title}{#1}
+\DeclareFieldFormat[article,book,inbook,inproceedings,online]{booktitle}{#1}
+\DeclareFieldFormat[article,book,inbook,inproceedings,online]{year}{#1}
+
+\DeclareFieldFormat[article,inproceedings]{journaltitle}{#1\isdot}
+\DeclareFieldFormat[article,inproceedings]{number}{Iss\adddot\addnbspace#1} % TODO: Iss tarttee ehkä olla No.
+\DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\adddot\addnbspace#1}
+
+\DeclareFieldFormat[book,online]{url}{\url{#1}}
+\DeclareFieldFormat[online]{urldate}{
+ (\bibstring{urlseen}\space\thefield{urlday}\addperiod\thefield{urlmonth}\addperiod\thefield{urlyear})
 }
 
-\DeclareFieldFormat[%
-  article,inbook,incollection,inproceedings,
-  patent,thesis,unpublished]{citetitle}{#1\isdot}
-\DeclareFieldFormat[%
-  article,inbook,incollection,inproceedings,
-  patent,thesis,unpublished]{title}{#1\isdot}
-\DeclareFieldFormat{pages}{#1}
+\DefineBibliographyStrings{finnish}{
+ bibliography = {Lähteet},
+ editor = {(ed.)},
+ editors = {(eds.)},
+ urlfrom = {Saatavilla},
+ urlseen = {viitattu},
+ volume = {Vol},
+}
+
+\DefineBibliographyStrings{english}{
+ bibliography = {Bibliography},
+ editor = {(ed.)},
+ editors = {(eds.)},
+ urlfrom = {Available},
+ urlseen = {accessed},
+ volume = {Vol},
+}
+
+% Commas between everything
+\renewcommand*{\newunitpunct}{\addseparator}
+\renewcommand*{\labelnamepunct}{\addseparator}
+\ifnumeric
+    \renewcommand*{\finalnamedelim}{\multinamedelim}
+\else
+    \renewcommand*{\finalnamedelim}{\space\&\space}
+\fi
+
+\renewbibmacro*{publisher+location+date}{
+ \printlist{publisher}
+ \setunit{\addcomma\space}
+ \printlist{location}
+ \setunit{\addcomma\space}
+ \usebibmacro{date}
+ \newunit
+}
+
+\renewbibmacro*{journal+issuetitle}{%
+ \usebibmacro{journal}%
+ \setunit*{\addcomma\space}%
+ \iffieldundef{series}
+   {}
+   {\newunit
+    \printfield{series}%
+    \setunit{\addspace}}%
+ \usebibmacro{volume+number+eid}%
+ \setunit{\addspace}%
+ \usebibmacro{issue+date}%
+ \setunit{\addcolon\space}%
+ \usebibmacro{issue}%
+ \newunit
+}
+
+\renewbibmacro*{volume+number+eid}{%
+ \printfield{volume}
+ \setunit*{\addcomma\space}
+ \printfield{number}
+ \setunit*{\addcomma\space}
+ \printfield{eid}
+}
+
+\renewbibmacro*{issue+date}{%
+ \usebibmacro{issue}
+ \setunit{\addcomma\space}
+ \usebibmacro{date}
+}
+
+% Date accessed before URL
+\renewbibmacro*{url+urldate}{
+ \setunit*{\space}
+ \ifboolexpr{
+   test {\ifentrytype{online}}
+   %or
+   %test {\ifentrytype{book}}%
+ }{
+   \iffieldundef{url}
+     {}
+     \bibstring{urlfrom}
+ }{}
+ \iffieldundef{urlyear}
+   {}
+   {
+     %\setunit{\space}%
+     \usebibmacro{urldate}
+   }
+ \setunit{\addcolon\space}
+ \usebibmacro{url}
+}
+
+% Remove "In:"
+% \renewbibmacro{in:}{}
+
+\renewbibmacro*{in:}{
+ \ifentrytype{inbook}
+   {\printtext{\bibstring{in}\intitlepunct}
+   \ifnameundef{bookauthor}
+     {\ifnameundef{editor}
+       {\ifnameundef{translator}
+         {}
+         {\printnames{translator}
+           \setunit{\addcomma\space}
+           \usebibmacro{translator+othersstrg}
+           \clearname{translator}}}
+       {\printnames{editor}
+         \setunit{\space}
+         \usebibmacro{editor+othersstrg}
+         \clearname{editor}}}
+     {\ifnamesequal{author}{bookauthor}
+       {}
+       {\printnames{bookauthor}
+         \clearname{bookauthor}}}
+   \newunit\newblock}
+   {}
+}
+
+% Remove language
+\AtEveryBibitem{
+ \clearlist{language}
+}
+
+% -----------------------------------------------------------------------------
 
 % Graphics inclusion and drawing
 \RequirePackage{graphicx}
@@ -220,7 +368,7 @@
     exponent-product=\cdot
 }
 
-\if@langenglish
+\iflangenglish
     \sisetup{output-decimal-marker={.}}
 \else
     \sisetup{output-decimal-marker={,}}
@@ -237,7 +385,7 @@
 
 \renewcommand*{\glsnamefont}[1]{\textmd{#1}}
 
-\if@langenglish
+\iflangenglish
     \newcommand{\@glossaryname}{List of Symbols and Abbreviations}
 \else
     \newcommand{\@glossaryname}{Lyhenteet ja merkinnät}
@@ -257,7 +405,7 @@
 \RequirePackage[nottoc]{tocbibind}
 \RequirePackage[titletoc]{appendix}
 
-\if@langenglish
+\iflangenglish
     \addto\captionsenglish{%
         \renewcommand{\contentsname}{Contents}%
         \renewcommand\listfigurename{List of Figures}%
@@ -407,7 +555,7 @@ The originality of this thesis has been checked using the Turnitin OriginalityCh
 }
 
 % Terminology settings
-\if@langenglish
+\iflangenglish
     \newcommand{\@abstractname}{Abstract}
     \newcommand{\@otherabstractname}{Tiivistelmä}
     \newcommand{\@university}{Tampere University}
@@ -432,7 +580,7 @@ The originality of this thesis has been checked using the Turnitin OriginalityCh
 % Make the title
 \renewcommand\maketitle{
     \thispagestyle{empty}
-    \if@langenglish
+    \iflangenglish
         \begin{tikzpicture}[remember picture, overlay]
         \node[anchor=north west]
             at ($(current page.north west) + (1.16cm, -1.23cm)$)
