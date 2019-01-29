@@ -13,11 +13,10 @@ This is meant to be a minimalistic thesis template to Tampere University (TAU) t
 - https://academia.stackexchange.com/questions/15326/how-to-deal-with-particles-in-a-last-name-in-a-reference-list
   - In references.bib: `author = {Abby Muricho Onencan and Bartel {Van de Walle}}`
 - URL style after books etc.
-- "Pieni yksityiskohta on, että
-suomenkielisen teoksen sivut on ilmoitettu lyhenteellä s. ja englanninkielisen joko
-lyhenteellä p. (sivumäärä) tai pp. (sisäsivut). Kokonaissivumäärän ilmoittaminen ei ole
-pakollista, mutta se antaa lukijalle pientä vinkkiä lähteen laajuudesta."
-  - In references.bib: 
+- "Pieni yksityiskohta on, että suomenkielisen teoksen sivut on ilmoitettu lyhenteellä s. ja englanninkielisen joko lyhenteellä p. (sivumäärä) tai pp. (sisäsivut)."
+  - In references.bib: `language = {english}`
+- Pagetotal
+  - In references.bib: `pagetotal = {300}`
 
 ### Citation styles: numerical
 
