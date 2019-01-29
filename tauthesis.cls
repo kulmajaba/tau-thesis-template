@@ -229,7 +229,7 @@
 % Code listing handling
 \RequirePackage{listings}
 
-% textcl=true courtesy of Mika Kuitula
+% textcl=true courtesy of Mika Kuitunen
 \lstset{texcl=true, captionpos=b, commentstyle=\tt}
 
 % List of symbols and abbreviations
