@@ -176,13 +176,7 @@
 
 % Bibliography macros
 
-% TODO: adddot: lyhenteen perään, addperiod: muuten
-% TODO: dashed=false author-yeariin
-% TODO: sorting=none jos citationstyle on numeric
-
-\RequirePackage[style=\@citationstyle,maxcitenames=2,backend=biber,
-giveninits=true,isbn=false,doi=false,sorting=none,dashed=false]{biblatex}
-
+% Numeric citation
 \ifnumeric
     \RequirePackage[backend=biber,
                     doi=false,
@@ -191,7 +185,10 @@ giveninits=true,isbn=false,doi=false,sorting=none,dashed=false]{biblatex}
                     maxcitenames=2,
                     style=\@citationstyle,
                     sorting=none]{biblatex}
+
     \newcommand{\addseparator}{\addcomma\space}
+
+% Author-year citation
 \else
     \RequirePackage[backend=biber,
                     doi=false,
@@ -200,11 +197,9 @@ giveninits=true,isbn=false,doi=false,sorting=none,dashed=false]{biblatex}
                     maxcitenames=2,
                     style=\@citationstyle,
                     dashed=false]{biblatex}
-    \newcommand{\addseparator}{\addperiod\space}
-\fi
 
-\ifnumeric
-\else
+    \newcommand{\addseparator}{\addperiod\space}
+
     \DeclareNameAlias{sortname}{family-given}
     \DeclareNameAlias{default}{family-given}
 \fi
