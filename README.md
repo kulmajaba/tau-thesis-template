@@ -17,6 +17,8 @@ This is meant to be a minimalistic thesis template to Tampere University (TAU) t
   - In references.bib: `language = {english}`
 - Pagetotal
   - In references.bib: `pagetotal = {300}`
+- standard, manual, unpublished formatting
+- URL formatting: book, manual, standard, unpublished
 
 ### Citation styles: numerical
 
