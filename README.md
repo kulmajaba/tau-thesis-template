@@ -5,9 +5,28 @@ This is meant to be a minimalistic thesis template to Tampere University (TAU) t
 
 ## TODO
 
-### Citation styles
-- Numerical and Author-year
+- tauthesis.cls: @-letters have been removed from conditional variables, do they need to be returned?
+- tauthesis.cls: build fails if the class is given one of the default options in main.tex
 
+### Citation styles: general
+- Numerical and Author-year
+- https://academia.stackexchange.com/questions/15326/how-to-deal-with-particles-in-a-last-name-in-a-reference-list
+  - In references.bib: `author = {Abby Muricho Onencan and Bartel {Van de Walle}}`
+- URL style after books etc.
+- "Pieni yksityiskohta on, että
+suomenkielisen teoksen sivut on ilmoitettu lyhenteellä s. ja englanninkielisen joko
+lyhenteellä p. (sivumäärä) tai pp. (sisäsivut). Kokonaissivumäärän ilmoittaminen ei ole
+pakollista, mutta se antaa lukijalle pientä vinkkiä lähteen laajuudesta."
+  - In references.bib: 
+
+### Citation styles: numerical
+
+### Citation styles: author-year
+
+
+## Notes
+
+- adddot: after a shortened word, otherwise addperiod
 
 ## Version History
 Version 1.0 through 1.2 made by Ville Koljonen
