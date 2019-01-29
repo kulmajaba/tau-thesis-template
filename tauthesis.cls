@@ -210,9 +210,9 @@
 \setlength\bibitemsep{0.7\baselineskip}
 
 % Remove formatting (italics etc.) from titles and years
-\DeclareFieldFormat[article,book,inbook,inproceedings,online,thesis]{title}{#1}
+\DeclareFieldFormat[article,book,inbook,inproceedings,manual,online,thesis]{title}{#1}
 \DeclareFieldFormat[article,book,inbook,inproceedings,online]{booktitle}{#1}
-\DeclareFieldFormat[article,book,inbook,inproceedings,online]{year}{#1}
+\DeclareFieldFormat[article,book,inbook,inproceedings,manual,online]{year}{#1}
 
 \DeclareFieldFormat[article,inproceedings]{journaltitle}{#1\isdot}
 
