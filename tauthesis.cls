@@ -34,19 +34,21 @@
 \newif\iflangenglish
 \langenglishfalse
 
-\DeclareOption{english}{%
-    \langenglishtrue
-    \renewcommand{\@mainlanguage}{english}
-    \renewcommand{\@otherlanguage}{finnish}
-}
 \DeclareOption{finnish}{%
     \langenglishfalse
     \newcommand{\@mainlanguage}{finnish}
     \newcommand{\@otherlanguage}{english}
 }
+\DeclareOption{english}{%
+    \langenglishtrue
+    \renewcommand{\@mainlanguage}{english}
+    \renewcommand{\@otherlanguage}{finnish}
+}
 
 % Citation style selection.
-\newif\ifnumeric\numericfalse
+\newif\ifnumeric
+\numerictrue
+
 \DeclareOption{numeric}{%
     \numerictrue
     \newcommand{\@citationstyle}{numeric}
