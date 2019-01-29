@@ -206,6 +206,9 @@
     \DeclareNameAlias{default}{family-given}
 \fi
 
+% Leave space between citations
+\setlength\bibitemsep{0.7\baselineskip}
+
 % Remove formatting (italics etc.) from titles and years
 \DeclareFieldFormat[article,book,inbook,inproceedings,online,thesis]{title}{#1}
 \DeclareFieldFormat[article,book,inbook,inproceedings,online]{booktitle}{#1}
