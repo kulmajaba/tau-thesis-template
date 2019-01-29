@@ -16,6 +16,7 @@
 *.out
 *.pdf
 *.run.xml
+*.synctex
 *.synctex.gz
 *.toc
 *.xmpi
