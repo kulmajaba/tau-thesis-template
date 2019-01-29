@@ -215,8 +215,14 @@
 \DeclareFieldFormat[article,book,inbook,inproceedings,online]{year}{#1}
 
 \DeclareFieldFormat[article,inproceedings]{journaltitle}{#1\isdot}
-\DeclareFieldFormat[article,inproceedings]{number}{Iss\adddot\addnbspace#1} % TODO: Iss tarttee ehkä olla No.
-\DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\adddot\addnbspace#1}
+
+\ifnumeric
+    \DeclareFieldFormat[article,inproceedings]{number}{Iss\adddot\addnbspace#1} % TODO: Iss tarttee ehkä olla No.
+    \DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\adddot\addnbspace#1}
+\else
+    \DeclareFieldFormat[article,inproceedings]{number}{\unspace\mkbibparens{#1}}
+    \DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\adddot\addnbspace#1\iffieldundef{number}{}{\nopunct}} % TODO: siisti?
+\fi
 
 \DeclareFieldFormat[book,online]{url}{\url{#1}}
 \DeclareFieldFormat[online]{urldate}{
