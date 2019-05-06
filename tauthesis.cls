@@ -174,6 +174,9 @@
 \RequirePackage[en-GB,finnish]{datetime2}
 \DTMlangsetup[en-GB,finnish]{showdayofmonth=false}
 
+% Use same font and style for URLs as for text
+\urlstyle{same}
+
 % -----------------------------------------------------------------------------
 
 % Bibliography macros
@@ -224,8 +227,11 @@
     \DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\adddot\addnbspace#1\iffieldundef{number}{}{\nopunct}} % TODO: siisti?
 \fi
 
-\DeclareFieldFormat[book,online]{url}{\url{#1}}
-\DeclareFieldFormat[online]{urldate}{
+% Remove formatting from url field
+\DeclareFieldFormat[article,book,inbook,inproceedings,manual,online,thesis]{url}{\url{#1}}
+
+% Formatting for urldate
+\DeclareFieldFormat[article,book,inbook,inproceedings,manual,online,thesis]{urldate}{
  (\bibstring{urlseen}\space\thefield{urlday}\addperiod\thefield{urlmonth}\addperiod\thefield{urlyear})
 }
 
@@ -247,7 +253,7 @@
  volume = {Vol},
 }
 
-% Commas between everything
+% Right separators between everything
 \renewcommand*{\newunitpunct}{\addseparator}
 \renewcommand*{\labelnamepunct}{\addseparator}
 \ifnumeric
