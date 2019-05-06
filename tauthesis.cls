@@ -394,13 +394,11 @@
 % Code listing handling
 \RequirePackage{listings}
 
-% textcl=true courtesy of Mika Kuitunen
+% Escape to LaTeX on comment lines
 \lstset{texcl=true, captionpos=b, commentstyle=\tt}
 
 % List of symbols and abbreviations
-\RequirePackage[automake, toc, nonumberlist, nopostdot]{glossaries}
-
-\renewcommand*{\glsnamefont}[1]{\textmd{#1}}
+\RequirePackage[automake, nonumberlist, nopostdot]{glossaries}
 
 \if@langenglish
     \newcommand{\@glossaryname}{List of Symbols and Abbreviations}
@@ -411,15 +409,13 @@
 \renewcommand{\glossary}{
     \glsaddall
     \setglossarystyle{long}
-    \begin{spacing}{0.6}
         \setlength{\glsdescwidth}{0.75\textwidth}
+        \renewcommand*{\glsgroupskip}{}
         \printglossary[title=\@glossaryname]
-    \end{spacing}
 }
 
 % Table of contents formatting
 \RequirePackage[titles]{tocloft}
-\RequirePackage[nottoc]{tocbibind}
 \RequirePackage[titletoc]{appendix}
 
 \if@langenglish
@@ -437,10 +433,6 @@
     }
     \renewcommand{\lstlistlistingname}{Ohjelma- ja algoritmiluettelo}
 \fi
-
-\renewcommand{\lstlistoflistings}{\begingroup
-\tocfile{\lstlistlistingname}{lol}
-\endgroup}
  
 \renewcommand\cftchapfont{}
 \renewcommand{\cftchappagefont}{}
