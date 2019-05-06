@@ -30,31 +30,36 @@
 
 %%%%% CLASS OPTIONS %%%%%
 
-% Language selection.
-\newif\iflangenglish
-\langenglishfalse
+% Default options
+\newcommand{\@mainlanguage}{finnish}
+\newcommand{\@otherlanguage}{english}
+\newcommand{\@citationstyle}{numeric}
 
-\DeclareOption{finnish}{%
-    \langenglishfalse
-    \newcommand{\@mainlanguage}{finnish}
-    \newcommand{\@otherlanguage}{english}
-}
+% Language selection
+\newif\if@langenglish
+\@langenglishfalse
+
 \DeclareOption{english}{%
-    \langenglishtrue
+    \@langenglishtrue
     \renewcommand{\@mainlanguage}{english}
     \renewcommand{\@otherlanguage}{finnish}
 }
+\DeclareOption{finnish}{%
+    \@langenglishfalse
+    \renewcommand{\@mainlanguage}{finnish}
+    \renewcommand{\@otherlanguage}{english}
+}
 
-% Citation style selection.
-\newif\ifnumeric
-\numerictrue
+% Citation style selection
+\newif\if@numeric
+\@numerictrue
 
 \DeclareOption{numeric}{%
-    \numerictrue
-    \newcommand{\@citationstyle}{numeric}
+    \@numerictrue
+    \renewcommand{\@citationstyle}{numeric}
 }
 \DeclareOption{authoryear}{%
-    \numericfalse
+    \@numericfalse
     \renewcommand{\@citationstyle}{authoryear}
 }
 
@@ -182,7 +187,7 @@
 % Bibliography macros
 
 % Numeric citation
-\ifnumeric
+\if@numeric
     \RequirePackage[backend=biber,
                     doi=false,
                     giveninits=true,
@@ -219,7 +224,7 @@
 
 \DeclareFieldFormat[article,inproceedings]{journaltitle}{#1\isdot}
 
-\ifnumeric
+\if@numeric
     \DeclareFieldFormat[article,inproceedings]{number}{Iss\adddot\addnbspace#1} % TODO: Iss tarttee ehkä olla No.
     \DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\adddot\addnbspace#1}
 \else
@@ -256,7 +261,7 @@
 % Right separators between everything
 \renewcommand*{\newunitpunct}{\addseparator}
 \renewcommand*{\labelnamepunct}{\addseparator}
-\ifnumeric
+\if@numeric
     \renewcommand*{\finalnamedelim}{\multinamedelim}
 \else
     \renewcommand*{\finalnamedelim}{\space\&\space}
@@ -380,7 +385,7 @@
     exponent-product=\cdot
 }
 
-\iflangenglish
+\if@langenglish
     \sisetup{output-decimal-marker={.}}
 \else
     \sisetup{output-decimal-marker={,}}
@@ -397,7 +402,7 @@
 
 \renewcommand*{\glsnamefont}[1]{\textmd{#1}}
 
-\iflangenglish
+\if@langenglish
     \newcommand{\@glossaryname}{List of Symbols and Abbreviations}
 \else
     \newcommand{\@glossaryname}{Lyhenteet ja merkinnät}
@@ -417,7 +422,7 @@
 \RequirePackage[nottoc]{tocbibind}
 \RequirePackage[titletoc]{appendix}
 
-\iflangenglish
+\if@langenglish
     \addto\captionsenglish{%
         \renewcommand{\contentsname}{Contents}%
         \renewcommand\listfigurename{List of Figures}%
@@ -567,7 +572,7 @@ The originality of this thesis has been checked using the Turnitin OriginalityCh
 }
 
 % Terminology settings
-\iflangenglish
+\if@langenglish
     \newcommand{\@abstractname}{Abstract}
     \newcommand{\@otherabstractname}{Tiivistelmä}
     \newcommand{\@university}{Tampere University}
@@ -592,7 +597,7 @@ The originality of this thesis has been checked using the Turnitin OriginalityCh
 % Make the title
 \renewcommand\maketitle{
     \thispagestyle{empty}
-    \iflangenglish
+    \if@langenglish
         \begin{tikzpicture}[remember picture, overlay]
         \node[anchor=north west]
             at ($(current page.north west) + (1.16cm, -1.23cm)$)
