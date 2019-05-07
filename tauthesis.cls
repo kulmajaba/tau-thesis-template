@@ -228,11 +228,11 @@
 \DeclareFieldFormat[article,inproceedings]{journaltitle}{#1\isdot}
 
 \if@numeric
-    \DeclareFieldFormat[article,inproceedings]{number}{Iss\adddot\addnbspace#1} % TODO: Iss tarttee ehkä olla No.
-    \DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\adddot\addnbspace#1}
+    \DeclareFieldFormat[article,inproceedings]{number}{\bibstring{number}\addnbspace#1} % TODO: Iss tarttee ehkä olla No.
+    \DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\addnbspace#1}
 \else
     \DeclareFieldFormat[article,inproceedings]{number}{\unspace\mkbibparens{#1}}
-    \DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\adddot\addnbspace#1\iffieldundef{number}{}{\nopunct}} % TODO: siisti?
+    \DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\addnbspace#1\iffieldundef{number}{}{\nopunct}}
 \fi
 
 % Remove formatting from url field
@@ -247,20 +247,22 @@
  bibliography = {Lähteet},
  editor = {(ed.)},
  editors = {(eds.)},
+ number = {No.},
  pagetotals = {s.},
  urlfrom = {Saatavilla},
  urlseen = {viitattu},
- volume = {Vol},
+ volume = {Vol.},
 }
 
 \DefineBibliographyStrings{english}{
  bibliography = {Bibliography},
  editor = {(ed.)},
  editors = {(eds.)},
+ number = {Iss.},
  pagetotals = {p.},
  urlfrom = {Available},
  urlseen = {accessed},
- volume = {Vol},
+ volume = {Vol.},
 }
 
 % Right separators between everything
