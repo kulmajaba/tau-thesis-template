@@ -217,6 +217,30 @@
     \DeclareNameAlias{default}{family-given} % TODO: is this used?
 \fi
 
+% Define bibliography string translations used by biblatex
+
+\DefineBibliographyStrings{finnish}{
+ bibliography = {Lähteet},
+ editor = {(ed.)},
+ editors = {(eds.)},
+ number = {No.},
+ pagetotals = {s.},
+ urlfrom = {Saatavilla},
+ urlseen = {viitattu},
+ volume = {Vol.},
+}
+
+\DefineBibliographyStrings{english}{
+ bibliography = {Bibliography},
+ editor = {(ed.)},
+ editors = {(eds.)},
+ number = {Iss.},
+ pagetotals = {p.},
+ urlfrom = {Available},
+ urlseen = {accessed},
+ volume = {Vol.},
+}
+
 % Leave space between citations
 \setlength\bibitemsep{0.7\baselineskip}
 
@@ -241,28 +265,6 @@
 % Formatting for urldate
 \DeclareFieldFormat[article,book,inbook,inproceedings,manual,online,thesis]{urldate}{
  (\bibstring{urlseen}\space\thefield{urlday}\addperiod\thefield{urlmonth}\addperiod\thefield{urlyear})
-}
-
-\DefineBibliographyStrings{finnish}{
- bibliography = {Lähteet},
- editor = {(ed.)},
- editors = {(eds.)},
- number = {No.},
- pagetotals = {s.},
- urlfrom = {Saatavilla},
- urlseen = {viitattu},
- volume = {Vol.},
-}
-
-\DefineBibliographyStrings{english}{
- bibliography = {Bibliography},
- editor = {(ed.)},
- editors = {(eds.)},
- number = {Iss.},
- pagetotals = {p.},
- urlfrom = {Available},
- urlseen = {accessed},
- volume = {Vol.},
 }
 
 % Right separators between everything
