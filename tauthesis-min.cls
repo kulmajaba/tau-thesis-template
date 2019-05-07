@@ -19,7 +19,7 @@
 % This work consists of the files tauthesis.cls.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{tauthesis-min}
+\ProvidesClass{tauthesis}
 [2019/05/06 v1.4 Thesis styles used in Tampere University]
 
 % Inherit from the report document class.
