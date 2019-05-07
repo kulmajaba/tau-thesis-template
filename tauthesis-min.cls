@@ -222,27 +222,27 @@
 \NewBibliographyString{series}
 
 \DefineBibliographyStrings{finnish}{
- bibliography = {Lähteet},
- editor = {(ed.)},
- editors = {(eds.)},
- number = {No.},
- pagetotals = {s.},
- series = {Julkaisu},
- urlfrom = {Saatavilla},
- urlseen = {viitattu},
- volume = {Vol.},
+  bibliography = {Lähteet},
+  editor = {(ed.)},
+  editors = {(eds.)},
+  number = {No.},
+  pagetotals = {s.},
+  series = {Julkaisu},
+  urlfrom = {Saatavilla},
+  urlseen = {viitattu},
+  volume = {Vol.},
 }
 
 \DefineBibliographyStrings{english}{
- bibliography = {Bibliography},
- editor = {(ed.)},
- editors = {(eds.)},
- number = {Iss.},
- pagetotals = {p.},
- series = {Publication},
- urlfrom = {Available},
- urlseen = {accessed},
- volume = {Vol.},
+  bibliography = {Bibliography},
+  editor = {(ed.)},
+  editors = {(eds.)},
+  number = {Iss.},
+  pagetotals = {p.},
+  series = {Publication},
+  urlfrom = {Available},
+  urlseen = {accessed},
+  volume = {Vol.},
 }
 
 % Leave space between citations
@@ -346,8 +346,12 @@
 }
 
 % URL related information, date before URL
+% Online: use this macro to print publisher and address
 \renewbibmacro*{url+urldate}{%
- \setunit*{\space}%
+  \ifentrytype{online}
+    {\usebibmacro{publisher+location+date}}
+    {}
+  \setunit*{\addseparator}%
   \iffieldundef{url}
     {}
     {\bibstring{urlfrom}}%
