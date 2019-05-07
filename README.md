@@ -5,30 +5,23 @@ This is meant to be a minimalistic thesis template to Tampere University (TAU) t
 
 ## TODO
 
-- Leaving any of the fields empty in main.tex (e.g. \\title) will cause an error durring compilation. Writing `~` into the field will fix this and the field remains empty
+- Leaving any of the fields empty in main.tex (e.g. \\title) will cause an error during compilation. Writing `~` into the field will fix this and the field remains empty
 - tauthesis: biblatex: URL will be printed always if available, for all bibtex types. Should this behavior be changed?
 - tauthesis: biblatex: DOIs are never printed, should this behavior be changed?
+- tauthesis: biblatex: series for thesis and thesis aliases will be printed, is the current format correct?
+- tauthesis: biblatex: standard, manual, unpublished formatting
 
-### Citation styles: general
+## Citation
+
 - Numerical and Author-year
-- https://academia.stackexchange.com/questions/15326/how-to-deal-with-particles-in-a-last-name-in-a-reference-list
+- Particles in author names: https://academia.stackexchange.com/questions/15326/how-to-deal-with-particles-in-a-last-name-in-a-reference-list
   - In references.bib: `author = {Abby Muricho Onencan and Bartel {Van de Walle}}`
-- URL style after books etc.
 - "Pieni yksityiskohta on, että suomenkielisen teoksen sivut on ilmoitettu lyhenteellä s. ja englanninkielisen joko lyhenteellä p. (sivumäärä) tai pp. (sisäsivut)."
   - In references.bib: `language = {english}`
 - Pagetotal
   - In references.bib: `pagetotal = {300}`
-- standard, manual, unpublished formatting
-- URL formatting: book, manual, standard, unpublished
-
-### Citation styles: numerical
-
-### Citation styles: author-year
-
 
 ## Notes
-
-- adddot: after a shortened word, otherwise addperiod
 
 ### Biblatex
 
@@ -41,6 +34,8 @@ This is meant to be a minimalistic thesis template to Tampere University (TAU) t
   - uniquename
   - maxbibnames
   - sortcites
+
+- adddot: after a shortened word, otherwise addperiod
 
 ## Version History
 Version 1.0 through 1.3 made by Ville Koljonen

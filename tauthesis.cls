@@ -323,7 +323,7 @@
   \newunit%
 }
 
-% Thesis, phdthesis and other subclasses, use publisher or institution
+% Thesis, phdthesis and other subclasses: use publisher or institution and add series
 \newbibmacro*{institution+location+date}{%
   \printlist{location}%
   \ifboolexpr{
