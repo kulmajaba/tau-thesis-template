@@ -5,9 +5,9 @@ This is meant to be a minimalistic thesis template to Tampere University (TAU) t
 
 ## TODO
 
-- tauthesis.cls: @-letters have been removed from conditional variables, do they need to be returned?
-- tauthesis.cls: build fails if the class is given one of the default options in main.tex
 - Leaving any of the fields empty in main.tex (e.g. \\title) will cause an error durring compilation. Writing `~` into the field will fix this and the field remains empty
+- tauthesis: biblatex: URL will be printed always if available, for all bibtex types. Should this behavior be changed?
+- tauthesis: biblatex: DOIs are never printed, should this behavior be changed?
 
 ### Citation styles: general
 - Numerical and Author-year
@@ -33,10 +33,14 @@ This is meant to be a minimalistic thesis template to Tampere University (TAU) t
 ### Biblatex
 
 - Package options:
-  - doi: print DOI (Digital Object Identifier) field, [false, true]
+  - doi: print DOI field, [false, true]
   - isbn: print ISBN field, [false, true]
   - sorting: sort bibliography, multiple options
-  - uniquename: [full, init]
+
+- Options to research:
+  - uniquename
+  - maxbibnames
+  - sortcites
 
 ## Version History
 Version 1.0 through 1.3 made by Ville Koljonen
