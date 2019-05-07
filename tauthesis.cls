@@ -219,12 +219,15 @@
 
 % Define bibliography string translations used by biblatex
 
+\NewBibliographyString{series}
+
 \DefineBibliographyStrings{finnish}{
  bibliography = {Lähteet},
  editor = {(ed.)},
  editors = {(eds.)},
  number = {No.},
  pagetotals = {s.},
+ series = {Julkaisu},
  urlfrom = {Saatavilla},
  urlseen = {viitattu},
  volume = {Vol.},
@@ -236,6 +239,7 @@
  editors = {(eds.)},
  number = {Iss.},
  pagetotals = {p.},
+ series = {Publication},
  urlfrom = {Available},
  urlseen = {accessed},
  volume = {Vol.},
@@ -244,23 +248,21 @@
 % Leave space between citations
 \setlength\bibitemsep{0.7\baselineskip}
 
-% Remove formatting (italics etc.) from titles and years
+% Remove formatting (italics etc.) from titles, booktitles and URLs
 \DeclareFieldFormat[article,book,inbook,inproceedings,manual,online,thesis]{title}{#1}
 \DeclareFieldFormat[article,book,inbook,inproceedings,online]{booktitle}{#1}
-\DeclareFieldFormat[article,book,inbook,inproceedings,manual,online]{year}{#1}
-
 \DeclareFieldFormat[article,inproceedings]{journaltitle}{#1\isdot}
-
-\if@numeric
-    \DeclareFieldFormat[article,inproceedings]{number}{\bibstring{number}\addnbspace#1} % TODO: Iss tarttee ehkä olla No.
-    \DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\addnbspace#1}
-\else
-    \DeclareFieldFormat[article,inproceedings]{number}{\unspace\mkbibparens{#1}}
-    \DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\addnbspace#1\iffieldundef{number}{}{\nopunct}}
-\fi
-
-% Remove formatting from url field
+%\DeclareFieldFormat[article,book,inbook,inproceedings,manual,online]{year}{#1} % TODO: is this necessary?
 \DeclareFieldFormat[article,book,inbook,inproceedings,manual,online,thesis]{url}{\url{#1}}
+
+% Volume and number formatting
+\if@numeric
+    \DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\addnbspace#1}
+    \DeclareFieldFormat[article,inproceedings]{number}{\bibstring{number}\addnbspace#1}
+\else
+    \DeclareFieldFormat[article,inproceedings]{volume}{\bibstring{volume}\addnbspace#1\iffieldundef{number}{}{\nopunct}}
+    \DeclareFieldFormat[article,inproceedings]{number}{\unspace\mkbibparens{#1}}
+\fi
 
 % Formatting for urldate
 \DeclareFieldFormat[article,book,inbook,inproceedings,manual,online,thesis]{urldate}{
@@ -276,94 +278,88 @@
     \renewcommand*{\finalnamedelim}{\space\&\space}
 \fi
 
-\renewbibmacro*{publisher+location+date}{%
- \printlist{publisher}%
- \setunit{\addcomma\space}%
- \printlist{location}%
- \setunit{\addcomma\space}%
- \usebibmacro{date}%
- \newunit
+% Bib macros - derived from biblatex files standard.bbx, authoryear.bbx and numeric.bbx
+
+% Numeric: format inproceedings etc. volume, number, eid
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+  \setunit*{\addcomma\space}%
+  \printfield{number}%
+  \setunit*{\addcomma\space}%
+  \printfield{eid}%
 }
 
+% Numeric: format inproceedings etc. journal title punctuation
 \renewbibmacro*{journal+issuetitle}{%
- \usebibmacro{journal}%
- \setunit*{\addcomma\space}%
- \iffieldundef{series}
-   {}
-   {\newunit
+  \usebibmacro{journal}%
+  \setunit*{\addcomma\space}%
+  \iffieldundef{series}
+    {}
+    {\newunit
     \printfield{series}%
     \setunit{\addspace}}%
- \usebibmacro{volume+number+eid}%
- \setunit{\addspace}%
- \usebibmacro{issue+date}%
- \setunit{\addcolon\space}%
- \usebibmacro{issue}%
- \newunit
+  \usebibmacro{volume+number+eid}%
+  \setunit{\addspace}%
+  \usebibmacro{issue+date}%
+  \setunit{\addcolon\space}%
+  \usebibmacro{issue}%
+  \newunit
 }
 
-\renewbibmacro*{volume+number+eid}{%
- \printfield{volume}%
- \setunit*{\addcomma\space}%
- \printfield{number}%
- \setunit*{\addcomma\space}%
- \printfield{eid}%
-}
-
+% Numeric: format inproceedings etc. date
 \renewbibmacro*{issue+date}{%
  \usebibmacro{issue}%
  \setunit{\addcomma\space}%
  \usebibmacro{date}%
 }
 
-% Date accessed before URL
+% Author-year and numeric: format publisher and location, numeric: format date
+\renewbibmacro*{publisher+location+date}{%
+  \printlist{publisher}%
+  \setunit{\addcomma\space}%
+  \printlist{location}%
+  \setunit{\addcomma\space}%
+  \usebibmacro{date}%
+  \newunit%
+}
+
+% Thesis, phdthesis and other subclasses, use publisher or institution
+\newbibmacro*{institution+location+date}{%
+  \printlist{location}%
+  \ifboolexpr{
+    test {\iflistundef{institution}}
+    and
+    test {\iflistundef{publisher}}
+  }
+    {\setunit*{\addcomma\space}}
+    {\setunit*{\addcolon\space}}%
+  \printlist{institution}%
+  \printlist{publisher}%
+  \iffieldundef{series}
+    {}
+    {\setunit{\addcomma\space}%
+      \bibstring{series}
+      \printfield{series}}%
+  \setunit{\addcomma\space}%
+  \usebibmacro{date}%
+  \newunit%
+}
+
+% URL related information, date before URL
 \renewbibmacro*{url+urldate}{%
  \setunit*{\space}%
- \ifboolexpr{
-   test {\ifentrytype{online}}
-   %or
-   %test {\ifentrytype{book}}%
- }{
-   \iffieldundef{url}
-     {}
-     \bibstring{urlfrom}%
- }{}
- \iffieldundef{urlyear}
-   {}
-   {
-     %\setunit{\space}%
-     \usebibmacro{urldate}%
-   }
- \setunit{\addcolon\space}%
- \usebibmacro{url}%
+  \iffieldundef{url}
+    {}
+    {\bibstring{urlfrom}}%
+  \iffieldundef{urlyear}
+    {}
+    {\setunit{\space}%
+    \usebibmacro{urldate}}%
+  \setunit{\addcolon\space}%
+  \usebibmacro{url}%
 }
 
-% Remove "In:"
-% \renewbibmacro{in:}{}
-
-\renewbibmacro*{in:}{%
- \ifentrytype{inbook}
-   {\printtext{\bibstring{in}\intitlepunct}%
-   \ifnameundef{bookauthor}
-     {\ifnameundef{editor}
-       {\ifnameundef{translator}
-         {}
-         {\printnames{translator}%
-           \setunit{\addcomma\space}%
-           \usebibmacro{translator+othersstrg}%
-           \clearname{translator}}}%
-       {\printnames{editor}%
-         \setunit{\space}%
-         \usebibmacro{editor+othersstrg}%
-         \clearname{editor}}}%
-     {\ifnamesequal{author}{bookauthor}
-       {}
-       {\printnames{bookauthor}%
-         \clearname{bookauthor}}}%
-   \newunit\newblock}
-   {}
-}
-
-% Remove language
+% Remove language field from all items
 \AtEveryBibitem{
  \clearlist{language}
 }
