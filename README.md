@@ -30,18 +30,34 @@ This is meant to be a minimalistic thesis template to Tampere University (TAU) t
 
 - adddot: after a shortened word, otherwise addperiod
 
+### Biblatex
+
+- Package options:
+  - doi: print DOI (Digital Object Identifier) field, [false, true]
+  - isbn: print ISBN field, [false, true]
+  - sorting: sort bibliography, multiple options
+  - uniquename: [full, init]
+
 ## Version History
-Version 1.0 through 1.2 made by Ville Koljonen
+Version 1.0 through 1.3 made by Ville Koljonen
 
-### Version 1.0
-- First published template.
+### 1.4
+- Continue to fix bibliography styles
 
-### Version 1.1
-- Replaced the glossaries package option xindy to automake. Now the template does not require Perl to be installed.
-- Added instructions how to compile the thesis using this template into the conclusion text.
+### 1.3
+- Some updates to appearance
+- Removed front matter entries from ToC
+- Fixed a problem with default document class options
 
-### Version 1.2
-- Updated the template to conform to new appearance guidelines.
-- Increased the width of the glossary for it to take less space.
-- Added compilation instructions to main.tex as well.
-- Fixed encoding issues relating to listings fix for Scandinavian letters in code comments.
+### 1.2
+- Updated the template to conform to new appearance guidelines
+- Increased the width of the glossary for it to take less space
+- Added compilation instructions to main.tex as well
+- Fixed encoding issues relating to listings fix for Scandinavian letters in code comments
+
+### 1.1
+- Replaced the glossaries package option xindy to automake. Now the template does not require Perl to be installed
+- Added instructions how to compile the thesis using this template into the conclusion text
+
+### 1.0
+- First published template
