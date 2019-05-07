@@ -14,13 +14,13 @@
 % This work has the LPPL maintenance status `maintained'.
 % 
 % The Current Maintainer of this work is
-%   Ville Koljonen (ville.koljonen (at) tuni.fi)
+%   Mika Kuitunen (mika.kuitunen(at)tuni.fi)
 %
 % This work consists of the files tauthesis.cls.
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{tauthesis}
-[2019/01/17 v1.2 Thesis styles used in Tampere University]
+[2019/05/06 v1.4 Thesis styles used in Tampere University]
 
 % Inherit from the report document class.
 \LoadClass[11pt, a4paper]{report}
@@ -63,11 +63,12 @@
     \renewcommand{\@citationstyle}{authoryear}
 }
 
+% Catch-all warning for unknown options
 \DeclareOption*{
   \ClassWarning{tauthesis}{Unknown option '\CurrentOption'}
 }
 
-% Default options.
+% Default options
 \ExecuteOptions{finnish,numeric}
 
 \ProcessOptions\relax
@@ -78,7 +79,7 @@
 % Requires sRGB_IEC61966-2-1_black_scaled.icc
 \RequirePackage[a-1b]{pdfx}
 
-% UTF-8 input
+% UTF-8 encoding
 \RequirePackage[utf8]{inputenc}
 
 % Arial-like font selection
@@ -193,25 +194,27 @@
                     giveninits=true,
                     isbn=false,
                     maxcitenames=2,
-                    style=\@citationstyle,
-                    sorting=none]{biblatex}
+                    sorting=none, % No sorting, entries are in order of appearance
+                    style=\@citationstyle]{biblatex}
 
     \newcommand{\addseparator}{\addcomma\space}
 
 % Author-year citation
 \else
     \RequirePackage[backend=biber,
+                    dashed=false, % Special option for author-year
                     doi=false,
                     giveninits=true,
                     isbn=false,
                     maxcitenames=2,
-                    style=\@citationstyle,
-                    dashed=false]{biblatex}
+                    sorting=nyt, % Sort by name, year, title
+                    sortlocale=auto, % Use Babel language selection to determine locale
+                    style=\@citationstyle]{biblatex}
 
     \newcommand{\addseparator}{\addperiod\space}
 
-    \DeclareNameAlias{sortname}{family-given}
-    \DeclareNameAlias{default}{family-given}
+    \DeclareNameAlias{sortname}{family-given} % TODO: is this used?
+    \DeclareNameAlias{default}{family-given} % TODO: is this used?
 \fi
 
 % Leave space between citations
@@ -267,12 +270,12 @@
     \renewcommand*{\finalnamedelim}{\space\&\space}
 \fi
 
-\renewbibmacro*{publisher+location+date}{
- \printlist{publisher}
- \setunit{\addcomma\space}
- \printlist{location}
- \setunit{\addcomma\space}
- \usebibmacro{date}
+\renewbibmacro*{publisher+location+date}{%
+ \printlist{publisher}%
+ \setunit{\addcomma\space}%
+ \printlist{location}%
+ \setunit{\addcomma\space}%
+ \usebibmacro{date}%
  \newunit
 }
 
@@ -293,22 +296,22 @@
 }
 
 \renewbibmacro*{volume+number+eid}{%
- \printfield{volume}
- \setunit*{\addcomma\space}
- \printfield{number}
- \setunit*{\addcomma\space}
- \printfield{eid}
+ \printfield{volume}%
+ \setunit*{\addcomma\space}%
+ \printfield{number}%
+ \setunit*{\addcomma\space}%
+ \printfield{eid}%
 }
 
 \renewbibmacro*{issue+date}{%
- \usebibmacro{issue}
- \setunit{\addcomma\space}
- \usebibmacro{date}
+ \usebibmacro{issue}%
+ \setunit{\addcomma\space}%
+ \usebibmacro{date}%
 }
 
 % Date accessed before URL
-\renewbibmacro*{url+urldate}{
- \setunit*{\space}
+\renewbibmacro*{url+urldate}{%
+ \setunit*{\space}%
  \ifboolexpr{
    test {\ifentrytype{online}}
    %or
@@ -316,40 +319,40 @@
  }{
    \iffieldundef{url}
      {}
-     \bibstring{urlfrom}
+     \bibstring{urlfrom}%
  }{}
  \iffieldundef{urlyear}
    {}
    {
      %\setunit{\space}%
-     \usebibmacro{urldate}
+     \usebibmacro{urldate}%
    }
- \setunit{\addcolon\space}
- \usebibmacro{url}
+ \setunit{\addcolon\space}%
+ \usebibmacro{url}%
 }
 
 % Remove "In:"
 % \renewbibmacro{in:}{}
 
-\renewbibmacro*{in:}{
+\renewbibmacro*{in:}{%
  \ifentrytype{inbook}
-   {\printtext{\bibstring{in}\intitlepunct}
+   {\printtext{\bibstring{in}\intitlepunct}%
    \ifnameundef{bookauthor}
      {\ifnameundef{editor}
        {\ifnameundef{translator}
          {}
-         {\printnames{translator}
-           \setunit{\addcomma\space}
-           \usebibmacro{translator+othersstrg}
-           \clearname{translator}}}
-       {\printnames{editor}
-         \setunit{\space}
-         \usebibmacro{editor+othersstrg}
-         \clearname{editor}}}
+         {\printnames{translator}%
+           \setunit{\addcomma\space}%
+           \usebibmacro{translator+othersstrg}%
+           \clearname{translator}}}%
+       {\printnames{editor}%
+         \setunit{\space}%
+         \usebibmacro{editor+othersstrg}%
+         \clearname{editor}}}%
      {\ifnamesequal{author}{bookauthor}
        {}
-       {\printnames{bookauthor}
-         \clearname{bookauthor}}}
+       {\printnames{bookauthor}%
+         \clearname{bookauthor}}}%
    \newunit\newblock}
    {}
 }
