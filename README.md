@@ -4,7 +4,7 @@ This is meant to be a minimalistic thesis template to Tampere University (TAU) t
 
 Main document class and document: `tauthesis.cls` and `main.tex`. Used by default.
 
-Minimalist class and main document where imports can be removed more easily: `tauthesis-min.cls` and `main-min.tex`. Remember to remove the default document class (and preferably the defaukt main document) If using these.
+Minimalist class and main document where imports can be removed more easily: `tauthesis-min.cls` and `main-min.tex`. Remember to remove the default document class (and preferably the default main document) If using these.
 
 
 ## TODO
