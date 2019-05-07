@@ -2,6 +2,10 @@
 
 This is meant to be a minimalistic thesis template to Tampere University (TAU) theses and reports.
 
+Main document class and document: `tauthesis.cls` and `main.tex`. Used by default.
+
+Minimalist class and main document where imports can be removed more easily: `tauthesis-min.cls` and `main-min.tex`. Remember to remove the default document class (and preferably the defaukt main document) If using these.
+
 
 ## TODO
 
@@ -10,6 +14,7 @@ This is meant to be a minimalistic thesis template to Tampere University (TAU) t
 - tauthesis: biblatex: DOIs are never printed, should this behavior be changed?
 - tauthesis: biblatex: series for thesis and thesis aliases will be printed, is the current format correct?
 - tauthesis: biblatex: standard, manual, unpublished formatting
+- tauthesis: listings: optional replacement with minted for better compatibility
 
 ## Citation
 
@@ -22,6 +27,8 @@ This is meant to be a minimalistic thesis template to Tampere University (TAU) t
   - In references.bib: `pagetotal = {300}`
 
 ## Notes
+
+- To print all references: `\nocite{*}` before `\printbibliography`
 
 ### Biblatex
 
