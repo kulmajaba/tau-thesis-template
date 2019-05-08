@@ -54,9 +54,8 @@ Version 1.0 through 1.3 made by Ville Koljonen
   - Adding graphics
   - Adding formulas
   - Listings
-  - `biblatex` usage
+  - Biblatex usage
   - Customization
-  - 
 - Strip tauthesis-min down to bare essentials
 - Introduce an alternative to `listings`, possibly with `minted`
 - Figure out the best way of maintaining tauthesis/main and tauthesis-min/main-min
