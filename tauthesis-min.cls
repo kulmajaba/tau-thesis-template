@@ -19,7 +19,7 @@
 % This work consists of the files tauthesis.cls.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{tauthesis}
+\ProvidesClass{tauthesis-min}
 [2019/05/06 v1.4 Thesis styles used in Tampere University]
 
 % Inherit from the report document class.
@@ -289,6 +289,13 @@
   \printfield{eid}%
 }
 
+% Numeric: format inproceedings etc. date
+\renewbibmacro*{issue+date}{%
+ \usebibmacro{issue}%
+ \setunit{\addcomma\space}%
+ \usebibmacro{date}%
+}
+
 % Numeric: format inproceedings etc. journal title punctuation
 \renewbibmacro*{journal+issuetitle}{%
   \usebibmacro{journal}%
@@ -304,13 +311,6 @@
   \setunit{\addcolon\space}%
   \usebibmacro{issue}%
   \newunit
-}
-
-% Numeric: format inproceedings etc. date
-\renewbibmacro*{issue+date}{%
- \usebibmacro{issue}%
- \setunit{\addcomma\space}%
- \usebibmacro{date}%
 }
 
 % Author-year and numeric: format publisher and location, numeric: format date
@@ -343,6 +343,30 @@
   \setunit{\addcomma\space}%
   \usebibmacro{date}%
   \newunit%
+}
+
+% inbook: format book authors, editors etc. For everything else, leave out "in:"
+\renewbibmacro*{in:}{%
+ \ifentrytype{inbook}
+    {\printtext{\bibstring{in}\intitlepunct}%
+    \ifnameundef{bookauthor}
+      {\ifnameundef{editor}
+        {\ifnameundef{translator}
+          {}
+          {\printnames{translator}%
+          \setunit{\addcomma\space}%
+          \usebibmacro{translator+othersstrg}%
+          \clearname{translator}}}%
+        {\printnames{editor}%
+        \setunit{\space}%
+        \usebibmacro{editor+othersstrg}%
+        \clearname{editor}}}%
+      {\ifnamesequal{author}{bookauthor}
+        {}
+        {\printnames{bookauthor}%
+        \clearname{bookauthor}}}%
+  \newunit\newblock}
+  {}
 }
 
 % URL related information, date before URL
