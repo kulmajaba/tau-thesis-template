@@ -1,35 +1,7 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Congratulations, you've made an excellent choice
-%% of writing your Tampere University thesis using
-%% the LaTeX system. This document attempts to be
-%% as complete a template as possible to let you focus
-%% on the most important part: the writing itself.
-%% Thus the details regarding the visual appearance
-%% and even structure have already been worked out
-%% for you!
-%%
-%% I sincerely hope you will find this template useful
-%% in completing your thesis project. I've tried to
-%% add comments (followed by the % sign) to clarify
-%% the structure and purpose of some of the commands.
-%% Most of the magic happens in the file tauthesis.cls,
-%% which you are more than welcome to take a look at.
-%% Just refrain from editing it in the most crucial
-%% versions of the thesis!
-%%
-%% I wish you and your thesis project the best of luck!
-%% If this template causes you trouble along the way
-%% or if you've any suggestions for improving it,
-%% please contact me via email at
-%% 
-%% ville.koljonen (at) tuni.fi.
-%%
-%% Yours,
-%%
-%% Ville Koljonen
-%% 17th January 2019
-%%
-%% PS. This template or its associated class file don't
+%% More detailed documentation and instructions can be found in README.md
+
+%%%%% NOTICES %%%%%
+%% This template or its associated class file don't
 %% come with a warranty. The content is provided as is,
 %% without even the implied promise of fitness to the
 %% mentioned purpose. You, as the author of the thesis,
@@ -37,26 +9,6 @@
 %% provided material. No one else is liable to you for
 %% any damage inflicted on you or your thesis, were it
 %% caused by using this template or not.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%% NOTICE %%%%%
-%% Please read through the entire template
-%% (files under ./tex) to find all instructions.
-%% It is possible that the attached pdf files
-%% do not include the latest information.
-%%%%%%%%%%%%%%%%%%
-
-%%%%% INSTRUCTIONS FOR COMPILING THE DOCUMENT %%%%%
-%% Overleaf: just click Recompile.
-%% Terminal:
-%%  1. pdflatex main.tex
-%%  2. makeindex main.tex
-%%  3. biber main.tex
-%%  4. pdflatex main.tex
-%%  5. pdflatex main.tex
-%% Similar sequence of commands is also required
-%% in LaTeX specific editors.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%% PREAMBLE %%%%%
 
@@ -82,73 +34,14 @@
 % the document! This can dramatically reduce
 % compilation time.
 
-% (SI) unit handling
-\usepackage{siunitx}
-\sisetup{
-    detect-all,
-    math-sf=\mathrm,
-    exponent-product=\cdot
-}
-
-\if@langenglish
-    \sisetup{output-decimal-marker={.}}
-\else
-    \sisetup{output-decimal-marker={,}}
-\fi
-
-% Code listing handling
-\usepackage{listings}
-\lstset{texcl=true, captionpos=b, commentstyle=\tt} % Escape to LaTeX on comment lines
-
-\if@langenglish
-    \renewcommand{\lstlistlistingname}{List of Programs and Algorithms}
-\else
-    \renewcommand{\lstlistlistingname}{Ohjelma- ja algoritmiluettelo}
-\fi
-
-% Graphs
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.15}
-
-% Subfigures and wrapping text
-\usepackage{subcaption}
-
-% Mathematics packages
-\usepackage{amsmath, amssymb, amsthm}
-%\usepackage{bm}
-
-% Chemistry packages
-% Newest mhchem is attached for compatibility
-\usepackage{chemfig}
-\usepackage[version=4]{mhchem}
-
 %%%%% Your commands.
 
 % Print verbatim LaTeX commands
 \newcommand{\verbcommand}[1]{\texttt{\textbackslash #1}}
 
-% Basic theorems in Finnish and in English.
-% Remove [chapter] if you wish a simply
-% running enumeration.
-\newtheorem{lause}{Lause}[chapter]
-\newtheorem{theorem}[lause]{Theorem}
-
-% Use the commented version for individually
-% enumerated lemmas
-\newtheorem{apulause}[lause]{Apulause}
-\newtheorem{lemma}[lause]{Lemma}
-% \newtheorem{apulause}{Apulause}[chapter]
-% \newtheorem{lemma}{Lemma}[chapter]
-
-% Definition style
-\theoremstyle{definition}
-\newtheorem{maaritelma}{Määritelmä}[chapter]
-\newtheorem{definition}[maaritelma]{Definition}
-% examples in this style
-
 %%%%% Glossary information.
 
-\loadglsentries[main]{tex/sanasto.tex}
+% \loadglsentries[main]{tex/sanasto.tex} % Uncomment and add your glossary source
 \makeglossaries
 
 %%%%% Citation information.
@@ -228,7 +121,6 @@
 
 \listoffigures
 \listoftables
-\lstlistoflistings
 
 % Print the glossary of terms.
 
@@ -245,17 +137,13 @@
 % names as possible.
 \chapter{Johdanto}
 \label{ch:johdanto}
-\input{tex/johdanto.tex}
 
-\chapter{Esitystyyli}
-\label{ch:esitystyyli}
-\input{tex/esitystyyli.tex}
+Tämä mallipohja liittyy Tampereen yliopiston tekniikan alan opinnäytteiden kirjoitusohjeisiin \parencite{kirjoitusohje2018}.
+Tästä versiosta on poistettu kaikki mahdollinen, jotta jäljelle jäisi vain oleellinen.
 
-\chapter{Viittaustekniikat}
-\label{ch:viittaustekniikat}
-\input{tex/viittaustekniikat.tex}
+This document template conforms to the Guide to Writing a Thesis in Tampere University \parencite{thesisguide2018}.
+This version has been stripped as far as possible to leave only the essentials.
 
-% Add chapters similarly.
 
 \chapter{Yhteenveto}
 \label{ch:yhteenveto}

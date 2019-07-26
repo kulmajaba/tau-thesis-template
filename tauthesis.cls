@@ -11,7 +11,7 @@
 % and version 1.3 or later is part of all distributions of LaTeX
 % version 2005/12/01 or later.
 %
-% This work has the LPPL maintenance status 'maintained'.
+% This work has the LPPL maintenance status `maintained'.
 % 
 % The Current Maintainer of this work is
 %   Mika Kuitunen (mika.kuitunen(at)tuni.fi)
@@ -20,7 +20,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{tauthesis}
-[2019/05/06 v1.4 Thesis styles used in Tampere University]
+[2019/07/26 v1.5 Thesis styles used in Tampere University]
 
 % Inherit from the report document class.
 \LoadClass[11pt, a4paper]{report}
@@ -409,27 +409,6 @@
 % Text hyperlinking
 \RequirePackage{hyperref}
 
-% (SI) unit handling
-\RequirePackage{siunitx}
-
-\sisetup{
-    detect-all,
-    math-sf=\mathrm,
-    exponent-product=\cdot
-}
-
-\if@langenglish
-    \sisetup{output-decimal-marker={.}}
-\else
-    \sisetup{output-decimal-marker={,}}
-\fi
-
-% Code listing handling
-\RequirePackage{listings}
-
-% Escape to LaTeX on comment lines
-\lstset{texcl=true, captionpos=b, commentstyle=\tt}
-
 % List of symbols and abbreviations
 \RequirePackage[automake, nonumberlist, nopostdot]{glossaries}
 
@@ -457,14 +436,12 @@
         \renewcommand\listfigurename{List of Figures}%
         \renewcommand{\listtablename}{List of Tables}%
     }
-    \renewcommand{\lstlistlistingname}{List of Programs and Algorithms}
 \else
     \addto\captionsfinnish{%
         \renewcommand{\contentsname}{Sisällysluettelo}%
         \renewcommand\listfigurename{Kuvaluettelo}%
         \renewcommand{\listtablename}{Taulukkoluettelo}%
     }
-    \renewcommand{\lstlistlistingname}{Ohjelma- ja algoritmiluettelo}
 \fi
  
 \renewcommand\cftchapfont{}
