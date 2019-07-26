@@ -1,36 +1,30 @@
 # TAU LaTeX Thesis Template
 
-This is meant to be a minimalistic thesis template to Tampere University (TAU) theses and reports.
+This is meant to be a minimalistic thesis template to Tampere University (TAU) theses and reports. The current template is made to match the Hervanta campus thesis writing guide as closely as possible.
 
 Main document class and document: `tauthesis.cls` and `main.tex`. Used by default.
 
-Minimalist class and main document where imports can be removed more easily: `tauthesis-min.cls` and `main-min.tex`. Remember to remove the default document class (and preferably the default main document) If using these.
+Minimalist class and main document where imports can be removed more easily: `tauthesis-min.cls` and `main-min.tex`. Remember to remove the class and the main document you are not using, and rename the used class and document to `tauthesis.cls` and `main.tex`
 
-## Citation
+## Contributing
 
-- Numerical and Author-year
+All contributions are welcome! If you have an issue with the template or notice something is missing (in the wiki for example), please open an issue on GitHub. If you think you can solve it yourself, send in a PR!
+
+## Notes
+
+### Citation
+
+Supported styles are numerical and author-year
+
 - Particles in author names: https://academia.stackexchange.com/questions/15326/how-to-deal-with-particles-in-a-last-name-in-a-reference-list
   - In references.bib: `author = {Abby Muricho Onencan and Bartel {Van de Walle}}`
 - "Pieni yksityiskohta on, että suomenkielisen teoksen sivut on ilmoitettu lyhenteellä s. ja englanninkielisen joko lyhenteellä p. (sivumäärä) tai pp. (sisäsivut)."
   - In references.bib: `language = {english}`
 - Pagetotal
   - In references.bib: `pagetotal = {300}`
-
-## Notes
-
 - To print all references: `\nocite{*}` before `\printbibliography`
 
 ### Biblatex
-
-- Package options:
-  - doi: print DOI field, [false, true]
-  - isbn: print ISBN field, [false, true]
-  - sorting: sort bibliography, multiple options
-
-- Options to research:
-  - uniquename
-  - maxbibnames
-  - sortcites
 
 - adddot: after a shortened word, otherwise addperiod
 
