@@ -6,16 +6,6 @@ Main document class and document: `tauthesis.cls` and `main.tex`. Used by defaul
 
 Minimalist class and main document where imports can be removed more easily: `tauthesis-min.cls` and `main-min.tex`. Remember to remove the default document class (and preferably the default main document) If using these.
 
-
-## TODO
-
-- Leaving any of the fields empty in main.tex (e.g. \\title) will cause an error during compilation. Writing `~` into the field will fix this and the field remains empty
-- tauthesis: biblatex: URL will be printed always if available, for all bibtex types. Should this behavior be changed?
-- tauthesis: biblatex: DOIs are never printed, should this behavior be changed?
-- tauthesis: biblatex: series for thesis and thesis aliases will be printed, is the current format correct?
-- tauthesis: biblatex: standard, manual, unpublished formatting
-- tauthesis: listings: optional replacement with minted for better compatibility
-
 ## Citation
 
 - Numerical and Author-year

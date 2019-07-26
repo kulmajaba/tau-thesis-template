@@ -11,7 +11,7 @@
 % and version 1.3 or later is part of all distributions of LaTeX
 % version 2005/12/01 or later.
 %
-% This work has the LPPL maintenance status `maintained'.
+% This work has the LPPL maintenance status 'maintained'.
 % 
 % The Current Maintainer of this work is
 %   Mika Kuitunen (mika.kuitunen(at)tuni.fi)
