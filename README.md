@@ -28,7 +28,7 @@ Overleaf: just click Recompile.
 Terminal:
  1. `pdflatex main.tex`
  2. `makeindex main.tex`
- 3. `biber main.tex`
+ 3. `biber main`
  4. `pdflatex main.tex`
  5. `pdflatex main.tex`
 Similar sequence of commands is also required
