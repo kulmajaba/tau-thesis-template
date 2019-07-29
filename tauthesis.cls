@@ -207,8 +207,10 @@
                     giveninits=true,
                     isbn=false,
                     maxcitenames=2,
+                    maxbibnames=99,
                     sorting=nyt, % Sort by name, year, title
                     sortlocale=auto, % Use Babel language selection to determine locale
+                    uniquename=init,
                     style=\@citationstyle]{biblatex}
 
     \newcommand{\addseparator}{\addperiod\space}
