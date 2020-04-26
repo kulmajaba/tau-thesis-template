@@ -15,15 +15,6 @@
 %% It is possible that the attached pdf files
 %% do not include the latest information.
 
-%%%%% INSTRUCTIONS FOR COMPILING THE DOCUMENT %%%%%
-%% Overleaf: just click Recompile.
-%% Terminal:
-%%  1. pdflatex main.tex
-%%  2. makeindex main.tex
-%%  3. biber main.tex
-%%  4. pdflatex main.tex
-%%  5. pdflatex main.tex
-
 %%%%% PREAMBLE %%%%%
 
 %%%%% Document class declaration.
@@ -47,6 +38,9 @@
 % you need a certain package, don't include it in
 % the document! This can dramatically reduce
 % compilation time.
+
+% Subfigures and wrapping text
+\usepackage{subcaption}
 
 % (SI) unit handling
 \usepackage{siunitx}
@@ -72,16 +66,13 @@
     \renewcommand{\lstlistlistingname}{Ohjelma- ja algoritmiluettelo}
 \fi
 
-% Graphs
+% Drawing graphs inside LaTeX
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.15}
 
-% Subfigures and wrapping text
-\usepackage{subcaption}
-
 % Mathematics packages
 \usepackage{amsmath, amssymb, amsthm}
-%\usepackage{bm}
+\usepackage{bm} % Bold arguments, use \bm{symbol}
 
 % Chemistry packages
 % Newest mhchem is attached for compatibility
