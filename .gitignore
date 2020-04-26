@@ -20,4 +20,8 @@
 *.synctex.gz
 *.toc
 *.xmpi
+
 tau-logo-fin-eps-converted-to.pdf
+
+# VS Code
+.vscode
