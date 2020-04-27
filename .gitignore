@@ -17,6 +17,7 @@
 *.pdf
 *.run.xml
 *.synctex
+*.synctex(busy)
 *.synctex.gz
 *.toc
 *.xmpi
