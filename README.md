@@ -1,5 +1,7 @@
 # TAU LaTeX Thesis Template
 
+**NOTE: This template is currently unmaintained. The university has not shown interest towards creating a centralized, maintained LaTeX template for its thesis work so there is not much motivation to keep this up to date. Pray your examiner deems the Overleaf template acceptable.**
+
 This is meant to be a minimalistic thesis template to Tampere University (TAU) theses and reports. The current template is made to match the Hervanta campus thesis writing guide as closely as possible.
 
 If you're just getting started or want to know something spesific, I highly recommend you check out the wiki for this project: https://github.com/kulmajaba/tau-thesis-template/wiki
